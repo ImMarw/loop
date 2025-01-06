@@ -3,30 +3,9 @@ Theme Name: CustomTheme1
 Theme URI: https://moje-stranka.cz/
 Author: Marw
 Author URI: https://moje-stranka.cz/
-Description: mucq
+Description: idk
 Version: 1.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: custom-theme
 */
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-header {
-    background-color: #333;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-footer {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
