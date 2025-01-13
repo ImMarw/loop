@@ -1,43 +1,48 @@
 <?php get_header(); ?>
 
-<div class="container mx-auto mt-8 max-w-screen-lg">
-  <!-- Začátek karty -->
-  <div class="flex bg-white shadow-lg rounded-lg overflow-hidden mb-8">
-    <!-- Obrázek vlevo -->
-    <div class="w-1/3">
-      <a href="#">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/default.jpg" class="w-full h-full object-cover" alt="Custom image">
-      </a>
+<div class="container">
+    <div class="row">
+        <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <div class="col-md-6 mb-4"> <!-- Každý příspěvek zabírá polovinu řádku -->
+                <div class="card h-100 d-flex flex-row"> <!-- "Karta" příspěvku -->
+                    <?php if (has_post_thumbnail()) : ?>
+                        <a href="<?php the_permalink(); ?>">
+                            <img src="<?php the_post_thumbnail_url('medium'); ?>" class="card-img-top" alt="<?php the_title(); ?>">
+                        </a>
+                    <?php endif; ?>
+
+                    <div class="card-body">
+                        <!-- Kategorie -->
+                        <div class="post-category mb-2">
+                            <?php foreach (get_the_category() as $category) : ?>
+                                <span class="badge bg-primary"><?php echo $category->name; ?></span>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <!-- Nadpis -->
+                        <h5 class="card-title">
+                            <a href="<?php the_permalink(); ?>" class="text-dark text-decoration-none">
+                                <?php the_title(); ?>
+                            </a>
+                        </h5>
+
+                        <!-- Úryvek -->
+                        <p class="card-text"><?php echo get_the_excerpt(); ?></p>
+
+                        <!-- Autor a datum -->
+                        <p class="card-meta text-muted mb-0">
+                            Autor: <?php the_author(); ?> | 
+                            <time datetime="<?php echo get_the_date('c'); ?>">
+                                <?php echo get_the_date(); ?>
+                            </time>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        <?php endwhile; else : ?>
+            <p>Žádné příspěvky nebyly nalezeny.</p>
+        <?php endif; ?>
     </div>
-
-    <!-- Obsah karty -->
-    <div class="w-2/3 p-6 flex flex-col justify-between">
-      <!-- Vlastní kategorie -->
-      <div class="text-sm text-purple-600 font-semibold uppercase mb-2">
-        AKCE ŠKOLY
-      </div>
-
-      <!-- Vlastní nadpis -->
-      <h2 class="text-2xl font-bold text-gray-800 mb-3">
-        <a href="#" class="hover:text-purple-600">
-		idk bruv
-        </a>
-      </h2>
-
-      <!-- Vlastní úryvek -->
-      <p class="text-gray-700 mb-4">
-        skibidi dop dop dop dop yes skibidi WWWWWW
-      </p>
-
-      <!-- Odkaz na celý obsah -->
-      <a href="#" class="text-blue-500 font-semibold hover:underline">
-        Číst více...
-      </a>
-
-      <!-- Autor a Datum -->
-      <div class="text-sm text-gray-500 mt-4">
-        Autor: <span class="font-semibold">Skibidi Travis</span> | 12. prosince 2024
-      </div>
-    </div>
-  </div>
 </div>
+
+<?php get_footer(); ?>
